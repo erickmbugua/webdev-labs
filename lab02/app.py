@@ -29,7 +29,7 @@ quotes = (
 ##############
 @app.route('/')
 def exercise1():
-    return 'Hello ' + current_user.first_name + ' ' + current_user.last_name + '!'
+    return 'Hello ' + current_user.get_full_name() + '!'
 
 
 ##############
@@ -66,18 +66,35 @@ def exercise4(city='Evanston, IL', search_term=''):
     url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(city, search_term)
     response = requests.get(url)
     restaurants = response.json()
+
     pprint(restaurants[0]) # for debugging
     return render_template(
         'restaurant.html',
         user=current_user,
         search_term=search_term,
         city=city,
-        restaurant=restaurants[0]
+        restaurant=restaurants[0],
     )
 
-@app.route('/cards')
-def photos_static():
-    return render_template('cards.html')
+@app.route('/restaurants/<city>/<search_term>')
+@app.route('/restaurants/<city>')
+@app.route('/restaurants')
+def photos_static(city='Evanston, IL', search_term=''):
+    url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(city, search_term)
+    response = requests.get(url)
+    restaurants = response.json()
+
+    pprint(restaurants[0]) # for debugging
+    return render_template(
+        'restaurants.html',
+        user=current_user,
+        search_term=search_term,
+        city=city,
+        restaurants=restaurants,
+        restaurants_per_row=5,
+    )
+    
+
 
 
     
