@@ -90,8 +90,7 @@ def photos_static(city='Evanston, IL', search_term=''):
         user=current_user,
         search_term=search_term,
         city=city,
-        restaurants=restaurants,
-        restaurants_per_row=5,
+        restaurants=restaurants
     )
     
 
