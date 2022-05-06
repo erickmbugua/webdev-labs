@@ -1,7 +1,7 @@
 const makeBigger = () => {
    console.log("yeah1");
    document.querySelector('.content').style.fontSize = "3.0em";
-   document.querySelector('h1').style.fontSize = "3.0em"
+   document.querySelector('h1').style.fontSize = "3.0em";
 }
 const makeSmaller = () => {
    console.log("yeah2")
